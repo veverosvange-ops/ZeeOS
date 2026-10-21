@@ -52,9 +52,9 @@ jobs:
           if [ -n "$INPUT_SCHEME" ]; then
             SCHEME="$INPUT_SCHEME"
           elif [ -n "$WORKSPACE" ]; then
-            SCHEME=$(xcodebuild -list -json -workspace "$WORKSPACE" | python3 -c 'import json,sys; d=json.load(sys.stdin); print((d.get("workspace",{}).get("schemes") or [""])[0])')
+            SCHEME=$(xcodebuild -list -json -workspace "$WORKSPACE" | /usr/bin/python3 -c 'import json,sys; d=json.load(sys.stdin); print((d.get("workspace",{}).get("schemes") or [""])[0])')
           else
-            SCHEME=$(xcodebuild -list -json -project "$PROJECT" | python3 -c 'import json,sys; d=json.load(sys.stdin); print((d.get("project",{}).get("schemes") or [""])[0])')
+            SCHEME=$(xcodebuild -list -json -project "$PROJECT" | /usr/bin/python3 -c 'import json,sys; d=json.load(sys.stdin); print((d.get("project",{}).get("schemes") or [""])[0])')
           fi
 
           [ -n "$SCHEME" ] || exit 1
@@ -128,6 +128,7 @@ jobs:
 
           ditto -c -k \
             --sequesterRsrc \
+            --keepParent \
             Payload "$IPA_PATH"
 
           if [ ! -s "$IPA_PATH" ]; then
