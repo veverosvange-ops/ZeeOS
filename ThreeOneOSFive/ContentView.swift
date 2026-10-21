@@ -62,16 +62,16 @@ struct ContentView: View {
                 HStack(alignment: .firstTextBaseline, spacing: 6) {
                     Text("Zee")
                         .font(.system(size: 28, weight: .black, design: .rounded))
-                        .foregroundStyle(.white)
+                        .foregroundColor(.white)
                     + Text("OS")
                         .font(.system(size: 28, weight: .black, design: .rounded))
-                        .foregroundStyle(AppTheme.accent)
+                        .foregroundColor(AppTheme.accent)
 
                 }
                 Text("PATCH CONTROL CENTER")
                     .font(.system(size: 9, weight: .heavy, design: .rounded))
                     .tracking(2.2)
-                    .foregroundStyle(AppTheme.secondaryAccent.opacity(0.75))
+                    .foregroundColor(AppTheme.secondaryAccent.opacity(0.75))
             }
 
             Spacer()
@@ -81,7 +81,7 @@ struct ContentView: View {
             } label: {
                 Image(systemName: "gearshape.fill")
                     .font(.system(size: 19, weight: .bold))
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundColor(AppTheme.accent)
                     .frame(width: 46, height: 46)
                     .background(
                         AppTheme.accent.opacity(0.12),
@@ -101,11 +101,11 @@ struct ContentView: View {
             HStack(spacing: 7) {
                 Image(systemName: "shield.lefthalf.filled")
                     .font(.system(size: 11, weight: .black))
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundColor(AppTheme.accent)
                 Text("DEVICE STATUS")
                     .font(.system(size: 11, weight: .black, design: .rounded))
                     .tracking(1.6)
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundColor(AppTheme.accent)
                 Spacer()
                 Circle()
                     .fill(appState.isSupported ? Color.green : Color.red)
@@ -147,16 +147,16 @@ struct ContentView: View {
             HStack {
                 Image(systemName: "bolt.fill")
                     .font(.system(size: 11, weight: .black))
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundColor(AppTheme.accent)
                 Text("PATCH OPTIONS")
                     .font(.system(size: 11, weight: .black, design: .rounded))
                     .tracking(1.6)
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundColor(AppTheme.accent)
                 Spacer()
                 Text("TAP TO TOGGLE")
                     .font(.system(size: 8, weight: .bold, design: .rounded))
                     .tracking(0.8)
-                    .foregroundStyle(.white.opacity(0.35))
+                    .foregroundColor(.white.opacity(0.35))
             }
 
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
@@ -183,7 +183,7 @@ struct ContentView: View {
                 }
                 Text(patchOperationBusy ? "PROCESSING PATCH…" : patchMessage)
                     .font(.system(size: 10, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.7))
+                    .foregroundColor(.white.opacity(0.7))
                     .lineLimit(2)
                 Spacer()
             }
@@ -208,11 +208,11 @@ struct ContentView: View {
             HStack(spacing: 7) {
                 Image(systemName: "gamecontroller.fill")
                     .font(.system(size: 11, weight: .black))
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundColor(AppTheme.accent)
                 Text("LAUNCH GAME")
                     .font(.system(size: 11, weight: .black, design: .rounded))
                     .tracking(1.6)
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundColor(AppTheme.accent)
             }
 
             HStack(spacing: 12) {
@@ -226,14 +226,14 @@ struct ContentView: View {
                 HStack(spacing: 9) {
                     Image(systemName: "trash.slash.fill")
                         .font(.system(size: 14, weight: .bold))
-                        .foregroundStyle(AppTheme.accentCyan)
+                        .foregroundColor(AppTheme.accentCyan)
                     Text("Clean Cache & Temp")
                         .font(.system(size: 13, weight: .black, design: .rounded))
-                        .foregroundStyle(.white)
+                        .foregroundColor(.white)
                     Spacer()
                     Image(systemName: "chevron.right")
                         .font(.system(size: 11, weight: .bold))
-                        .foregroundStyle(.white.opacity(0.3))
+                        .foregroundColor(.white.opacity(0.3))
                 }
                 .frame(maxWidth: .infinity, minHeight: 52)
                 .padding(.horizontal, 16)
@@ -256,13 +256,13 @@ struct ContentView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Image(systemName: "arrow.up.right.square.fill")
                     .font(.system(size: 20, weight: .bold))
-                    .foregroundStyle(color)
+                    .foregroundColor(color)
                 Text(title)
                     .font(.system(size: 14, weight: .black, design: .rounded))
-                    .foregroundStyle(.white)
+                    .foregroundColor(.white)
                 Text(subtitle)
                     .font(.system(size: 10, weight: .medium, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.45))
+                    .foregroundColor(.white.opacity(0.45))
             }
             .frame(maxWidth: .infinity, minHeight: 88, alignment: .leading)
             .padding(.horizontal, 14)
@@ -283,13 +283,13 @@ struct ContentView: View {
         VStack(alignment: .leading, spacing: 8) {
             Image(systemName: "lock.fill")
                 .font(.system(size: 20, weight: .bold))
-                .foregroundStyle(color.opacity(0.5))
+                .foregroundColor(color.opacity(0.5))
             Text(title)
                 .font(.system(size: 14, weight: .black, design: .rounded))
-                .foregroundStyle(.white.opacity(0.55))
+                .foregroundColor(.white.opacity(0.55))
             Text(subtitle)
                 .font(.system(size: 10, weight: .bold, design: .rounded))
-                .foregroundStyle(color.opacity(0.55))
+                .foregroundColor(color.opacity(0.55))
         }
         .frame(maxWidth: .infinity, minHeight: 88, alignment: .leading)
         .padding(.horizontal, 14)
@@ -312,11 +312,11 @@ struct ContentView: View {
             Text("SISTEMA PRONTO")
                 .font(.system(size: 10, weight: .black, design: .rounded))
                 .tracking(1.4)
-                .foregroundStyle(.white.opacity(0.65))
+                .foregroundColor(.white.opacity(0.65))
             Spacer()
             Text("ZeeOS • READY")
                 .font(.system(size: 9, weight: .bold, design: .rounded))
-                .foregroundStyle(AppTheme.accentCyan.opacity(0.8))
+                .foregroundColor(AppTheme.accentCyan.opacity(0.8))
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
@@ -331,11 +331,11 @@ struct ContentView: View {
         VStack(spacing: 10) {
             Text("Developed by ZeeOS")
                 .font(.system(size: 11, weight: .bold, design: .rounded))
-                .foregroundStyle(.white.opacity(0.6))
+                .foregroundColor(.white.opacity(0.6))
 
             Text("Official Channels")
                 .font(.system(size: 10, weight: .semibold, design: .rounded))
-                .foregroundStyle(AppTheme.accentCyan.opacity(0.75))
+                .foregroundColor(AppTheme.accentCyan.opacity(0.75))
 
             channelButton(title: "ZeeOS Telegram", url: "https://t.me/ogios1")
         }
@@ -351,7 +351,7 @@ struct ContentView: View {
         } label: {
             Label(title, systemImage: "paperplane.fill")
                 .font(.system(size: 10, weight: .bold, design: .rounded))
-                .foregroundStyle(.white)
+                .foregroundColor(.white)
                 .padding(.horizontal, 14)
                 .padding(.vertical, 9)
                 .background(AppTheme.accent.opacity(0.15), in: Capsule())
@@ -365,15 +365,15 @@ struct ContentView: View {
         HStack(spacing: 12) {
             Image(systemName: icon)
                 .font(.system(size: 16, weight: .bold))
-                .foregroundStyle(color)
+                .foregroundColor(color)
                 .frame(width: 22)
             Text(title)
                 .font(.system(size: 13, weight: .semibold, design: .rounded))
-                .foregroundStyle(.white.opacity(0.50))
+                .foregroundColor(.white.opacity(0.50))
             Spacer()
             Text(value)
                 .font(.system(size: 13, weight: .black, design: .rounded))
-                .foregroundStyle(.white)
+                .foregroundColor(.white)
         }
     }
 
@@ -504,12 +504,12 @@ private struct PatchOptionCard: View {
                             .frame(width: 32, height: 32)
                         Image(systemName: isEnabled ? "bolt.fill" : "bolt")
                             .font(.system(size: 14, weight: .bold))
-                            .foregroundStyle(color)
+                            .foregroundColor(color)
                     }
                     Spacer()
                     Text(isEnabled ? "ON" : "OFF")
                         .font(.system(size: 10, weight: .black, design: .rounded))
-                        .foregroundStyle(isEnabled ? .green : .white.opacity(0.45))
+                        .foregroundColor(isEnabled ? .green : .white.opacity(0.45))
                         .padding(.horizontal, 8)
                         .padding(.vertical, 3)
                         .background(
@@ -519,14 +519,14 @@ private struct PatchOptionCard: View {
 
                 Text(name)
                     .font(.system(size: 16, weight: .black, design: .rounded))
-                    .foregroundStyle(.white)
+                    .foregroundColor(.white)
                     .lineLimit(2)
                     .minimumScaleFactor(0.78)
 
                 Text(target)
                     .font(.system(size: 9, weight: .heavy, design: .rounded))
                     .tracking(1.2)
-                    .foregroundStyle(color.opacity(0.85))
+                    .foregroundColor(color.opacity(0.85))
 
                 HStack(spacing: 6) {
                     Circle()
@@ -536,7 +536,7 @@ private struct PatchOptionCard: View {
                     Text(isEnabled ? "ACTIVE" : "INACTIVE")
                         .font(.system(size: 8, weight: .black, design: .rounded))
                         .tracking(0.7)
-                        .foregroundStyle(.white.opacity(0.55))
+                        .foregroundColor(.white.opacity(0.55))
                 }
             }
             .frame(maxWidth: .infinity, minHeight: 148, alignment: .leading)
@@ -604,7 +604,7 @@ private struct PatchUnlockPrompt: View {
                     if let errorKey = store.unlockErrorKey {
                         Text(AppLanguage.english.text(errorKey))
                             .font(.footnote)
-                            .foregroundStyle(.red)
+                            .foregroundColor(.red)
                     }
                 } footer: {
                     Text("Enter the password once to unlock this ZeeOS package on this device.")
