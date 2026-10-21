@@ -3,60 +3,65 @@ name: Build Unsigned IPA
 on:
   push:
   pull_request:
-  workflow_dispatch: # Memungkinkan Anda menjalankan build secara manual dari tab Actions
+  workflow_dispatch:
 
 jobs:
   build:
-    name: ZeeOs (Unsigned)
-    runs-on: macos-latest # Membutuhkan environment macOS untuk Xcode
+    name: Build iOS App (Unsigned)
+    runs-on: macos-latest
 
     steps:
-      # 1. Unduh kode repositori
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 2. Atur versi Xcode (sesuaikan dengan kebutuhan proyek Anda)
       - name: Select Xcode Version
         run: sudo xcode-select -s /Applications/Xcode.app
 
-      # 3. Build proyek menggunakan xcodebuild (tanpa signing / unsigned)
       - name: Build App
         run: |
-          # Cari file .xcodeproj atau .xcworkspace secara otomatis
-          PROJECT_FILE=$(find . -maxdepth 2 -name "*.xcodeproj" | head -n 1)
-          SCHEME_NAME=$(basename "$PROJECT_FILE" .xcodeproj)
-          
-          echo "Found project: $PROJECT_FILE"
-          echo "Using scheme: $SCHEME_NAME"
+          # Cari file project atau workspace
+          if ls *.xcworkspace 1> /dev/null 2>&1; then
+            WORKSPACE_FILE=$(find . -maxdepth 2 -name "*.xcworkspace" | head -n 1)
+            BUILD_ARGS="-workspace $WORKSPACE_FILE"
+          else
+            PROJECT_FILE=$(find . -maxdepth 2 -name "*.xcodeproj" | head -n 1)
+            BUILD_ARGS="-project $PROJECT_FILE"
+          fi
 
-          # Buat folder build
+          # Dapatkan scheme pertama yang tersedia
+          SCHEME_NAME=$(xcodebuild $BUILD_ARGS -list -json | tr -d '\n' | grep -o '"schemes":\[[^]]*\]' | sed 's/"schemes":\[//;s/\]//;s/"//g;s/,/ /g' | awk '{print $1}')
+          
+          echo "Detected Scheme: $SCHEME_NAME"
+
+          if [ -z "$SCHEME_NAME" ]; then
+            echo "Error: No valid scheme found!"
+            exit 1
+          fi
+
           mkdir -p build/Release-iphoneos
 
-          # Proses kompilasi (Build for archiving/running tanpa signing)
-          xcodebuild -project "$PROJECT_FILE" \
+          # Build dengan mengubah nama tampilan aplikasi menjadi ZeeOS
+          xcodebuild $BUILD_ARGS \
             -scheme "$SCHEME_NAME" \
             -sdk iphoneos \
             -configuration Release \
+            PRODUCT_NAME="ZeeOS" \
+            INFOPLIST_KEY_CFBundleDisplayName="ZeeOS" \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
             DSTROOT="$PWD/build/dst" \
             install
 
-      # 4. Bungkus hasil build (.app) menjadi format .ipa
       - name: Create Unsigned IPA
         run: |
           mkdir -p Payload
-          # Pindahkan hasil .app ke dalam folder Payload
           cp -R build/dst/Applications/*.app Payload/
-          
-          # Kompres menjadi .ipa
-          zip -r UnsignedApp.ipa Payload
+          zip -r ZeeOS.ipa Payload
           rm -rf Payload
 
-      # 5. Unggah file .ipa agar bisa diunduh dari halaman GitHub Actions
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Unsigned-IPA
-          path: UnsignedApp.ipa
+          name: ZeeOS-Unsigned-IPA
+          path: ZeeOS.ipa
